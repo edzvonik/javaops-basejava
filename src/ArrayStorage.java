@@ -13,7 +13,7 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (size < 10000) {
+        if (size < storage.length) {
             storage[size] = r;
             size++;
         } else {
@@ -22,21 +22,21 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        Resume resume = null;
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                resume = storage[i];
+                return storage[i];
             }
         }
-        return resume;
+        return null;
     }
 
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 storage[i] = null;
-                System.arraycopy(storage, i + 1, storage, i, (size - (i + 1)));
+                System.arraycopy(storage, i + 1, storage, i, size - (i + 1));
                 size--;
+                break;
             }
         }
     }
@@ -45,9 +45,9 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] all = new Resume[size];
-        System.arraycopy(storage, 0, all, 0, size);
-        return all;
+        Resume[] resumes = new Resume[size];
+        System.arraycopy(storage, 0, resumes, 0, size);
+        return resumes;
     }
 
     int size() {
