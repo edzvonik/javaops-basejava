@@ -25,11 +25,14 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        if (size < storage.length) {
+        int index = exist(r.getUuid());
+        if (index == -1 && size < storage.length) {
             storage[size] = r;
             size++;
-        } else {
-            System.out.println("com.dzvonik.webapp.storage.ArrayStorage is overflow. Please, create a new storage");
+        } else if (index != -1 && size == storage.length){
+            System.out.println("Storage is overflow. Please, create a new storage");
+        } else if (index != -1) {
+            System.out.println("Resume already exist in storage");
         }
     }
 
@@ -38,6 +41,7 @@ public class ArrayStorage {
         if (index != -1) {
             return storage[index];
         }
+        System.out.println("Resume with uuid: " + uuid + " not found");
         return null;
     }
 
@@ -47,6 +51,8 @@ public class ArrayStorage {
             storage[index] = null;
             System.arraycopy(storage, index + 1, storage, index, size - (index + 1));
             size--;
+        } else {
+            System.out.println("Resume with uuid: " + uuid + " not found");
         }
     }
 
@@ -69,7 +75,6 @@ public class ArrayStorage {
                 return i;
             }
         }
-        System.out.println("Resume with uuid: " + uuid + " not found");
         return -1;
     }
 
