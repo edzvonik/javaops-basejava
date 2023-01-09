@@ -34,8 +34,9 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        if (exist(uuid) != -1) {
-            return storage[exist(uuid)];
+        int index = exist(uuid);
+        if (index != -1) {
+            return storage[index];
         }
         return null;
     }
