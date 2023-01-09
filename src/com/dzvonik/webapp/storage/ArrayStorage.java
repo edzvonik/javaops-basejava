@@ -43,13 +43,11 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                storage[i] = null;
-                System.arraycopy(storage, i + 1, storage, i, size - (i + 1));
-                size--;
-                break;
-            }
+        int index = exist(uuid);
+        if (index != -1) {
+            storage[index] = null;
+            System.arraycopy(storage, index + 1, storage, index, size - (index + 1));
+            size--;
         }
     }
 
@@ -65,4 +63,15 @@ public class ArrayStorage {
     public int size() {
         return size;
     }
+
+    private int exist(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        System.out.println("Resume with uuid: " + uuid + " not found");
+        return -1;
+    }
+
 }
