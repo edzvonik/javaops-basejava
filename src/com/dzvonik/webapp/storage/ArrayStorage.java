@@ -29,7 +29,7 @@ public class ArrayStorage {
         if (index == -1 && size < storage.length) {
             storage[size] = r;
             size++;
-        } else if (index != -1 && size == storage.length){
+        } else if (index != -1 && size == storage.length) {
             System.out.println("Storage is overflow. Please, create a new storage");
         } else if (index != -1) {
             System.out.println("Resume already exist in storage");
