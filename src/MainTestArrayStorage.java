@@ -1,11 +1,12 @@
 import com.dzvonik.webapp.model.Resume;
 import com.dzvonik.webapp.storage.ArrayStorage;
+import com.dzvonik.webapp.storage.Storage;
 
 /**
  * Test for your com.dzvonik.webapp.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    static final Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
