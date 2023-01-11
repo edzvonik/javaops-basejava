@@ -16,6 +16,10 @@ public class Resume {
         this.uuid = uuid;
     }
 
+    public Resume(String uuid) {
+        this.uuid = uuid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
