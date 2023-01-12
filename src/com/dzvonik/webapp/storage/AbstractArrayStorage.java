@@ -15,32 +15,35 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-    public void update(Resume r) {
-        int index = exist(r.getUuid());
-        if (index == -1) System.out.println("Resume not found!");
-        storage[index] = r;
-    }
-
-    public void save(Resume r) {
-        int index = exist(r.getUuid());
-        if (index == -1 && size < storage.length) {
-            storage[size] = r;
-            size++;
-        } else if (index != -1 && size == storage.length) {
-            System.out.println("Storage is overflow. Please, create a new storage");
-        } else if (index != -1) {
-            System.out.println("Resume already exist in storage");
+    public void update(Resume resume) {
+        int index = exist(resume.getUuid());
+        if (index < 0) {
+            System.out.println("Resume not found!");
+        } else {
+            storage[index] = resume;
         }
     }
 
+    public void save(Resume resume) {
+        int index = exist(resume.getUuid());
+        if (index >= 0) {
+            System.out.println("Resume " + resume.getUuid() + " already exist");
+        } else if (size == STORAGE_LIMIT) {
+            System.out.println("Storage is overflow");
+        } else {
+            insertElement(resume, index);
+            size++;
+        }
+    };
+
     public void delete(String uuid) {
         int index = exist(uuid);
-        if (index != -1) {
-            storage[index] = null;
-            System.arraycopy(storage, index + 1, storage, index, size - (index + 1));
-            size--;
-        } else {
+        if (index < 0) {
             System.out.println("Resume with uuid: " + uuid + " not found");
+        } else {
+            fillDeletedElement(index);
+            storage[size - 1] = null;
+            size--;
         }
     }
 
@@ -62,6 +65,10 @@ public abstract class AbstractArrayStorage implements Storage {
     public int size() {
         return size;
     }
+
+    protected abstract void fillDeletedElement(int index);
+
+    protected abstract void insertElement(Resume resume, int index);
 
     protected abstract int exist(String uuid);
 
