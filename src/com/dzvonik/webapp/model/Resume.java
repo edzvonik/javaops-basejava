@@ -1,5 +1,7 @@
 package com.dzvonik.webapp.model;
 
+import java.util.*;
+
 /**
  * Initial resume class
  */
@@ -12,11 +14,8 @@ public class Resume implements Comparable<Resume> {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
     public Resume() {
+        this(UUID.randomUUID().toString());
     }
 
     public Resume(String uuid) {
@@ -42,7 +41,6 @@ public class Resume implements Comparable<Resume> {
     public String toString() {
         return uuid;
     }
-
 
     @Override
     public int compareTo(Resume resume) {
