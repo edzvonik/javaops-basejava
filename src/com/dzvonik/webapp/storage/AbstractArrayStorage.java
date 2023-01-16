@@ -1,5 +1,6 @@
 package com.dzvonik.webapp.storage;
 
+import com.dzvonik.webapp.exception.*;
 import com.dzvonik.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void update(Resume resume) {
         int index = exist(resume.getUuid());
         if (index < 0) {
-            System.out.println("Resume not found!");
+            throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
         }
@@ -27,9 +28,9 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume resume) {
         int index = exist(resume.getUuid());
         if (index >= 0) {
-            System.out.println("Resume " + resume.getUuid() + " already exist");
+            throw new ExistStorageException(resume.getUuid());
         } else if (size == STORAGE_LIMIT) {
-            System.out.println("Storage is overflow");
+            throw new StorageException("Storage is overflow", resume.getUuid());
         } else {
             insertElement(resume, index);
             size++;
@@ -52,8 +53,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index != -1) {
             return storage[index];
         }
-        System.out.println("Resume with uuid: " + uuid + " not found");
-        return null;
+        throw new NotExistStorageException(uuid);
     }
 
     public Resume[] getAll() {
