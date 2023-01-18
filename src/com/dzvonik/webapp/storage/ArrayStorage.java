@@ -2,11 +2,6 @@ package com.dzvonik.webapp.storage;
 
 import com.dzvonik.webapp.model.Resume;
 
-import java.util.Arrays;
-
-/**
- * Array based storage for Resumes
- */
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
