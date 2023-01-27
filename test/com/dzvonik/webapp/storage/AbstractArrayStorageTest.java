@@ -60,7 +60,10 @@ class AbstractArrayStorageTest {
 
     @Test
     void deleteIfNotExist() {
-
+        Resume notExistResume = new Resume("uuid4");
+        assertThrows(NotExistStorageException.class, () -> {
+            storage.delete(notExistResume.getUuid());
+        });
     }
 
     @Test
