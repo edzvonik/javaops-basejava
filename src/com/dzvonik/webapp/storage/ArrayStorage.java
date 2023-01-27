@@ -4,6 +4,10 @@ import com.dzvonik.webapp.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
 
+    public ArrayStorage() {
+        super();
+    }
+
     @Override
     protected void fillDeletedElement(int index) {
         storage[index] = storage[size - 1];
