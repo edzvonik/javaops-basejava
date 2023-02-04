@@ -2,31 +2,27 @@ package com.dzvonik.webapp.storage;
 
 import com.dzvonik.webapp.exception.ExistStorageException;
 import com.dzvonik.webapp.exception.NotExistStorageException;
+import com.dzvonik.webapp.exception.StorageException;
 import com.dzvonik.webapp.model.Resume;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AbstractArrayStorageTest {
+class AbstractArrayStorageTest extends AbstractStorageTest {
 
-    protected static Storage storage;
-    protected Resume[] resumes;
-
-    public AbstractArrayStorageTest(Storage storage) {
-        this.storage = storage;
+    protected AbstractArrayStorageTest(Storage storage) {
+        super(storage);
     }
 
-    @BeforeEach
-    void prepare() {
-        storage.clear();
-        resumes = new Resume[3];
-        for (int i = 0; i < resumes.length; i++) {
-            resumes[i] = new Resume("uuid" + i);
-            storage.save(resumes[i]);
+    @Test
+    public void saveOverflow() throws Exception {
+        for (int i = 0; i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
+            storage.save(new Resume());
         }
+
+        assertThrows(StorageException.class, () -> {
+            storage.save(new Resume());
+        });
     }
 
     @Test
