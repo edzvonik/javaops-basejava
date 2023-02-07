@@ -2,6 +2,9 @@ package com.dzvonik.webapp.storage;
 
 import com.dzvonik.webapp.model.Resume;
 
+/**
+ * Array based storage for Resumes
+ */
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
@@ -22,5 +25,4 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
         return -1;
     }
-
 }
