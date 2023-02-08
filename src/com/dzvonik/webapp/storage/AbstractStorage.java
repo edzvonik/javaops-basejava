@@ -6,8 +6,11 @@ import com.dzvonik.webapp.model.Resume;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 public abstract class AbstractStorage<SK> implements Storage {
+
+    private static final Logger LOG = Logger.getLogger(AbstractStorage.class.getName());
 
     protected abstract SK getSearchKey(String uuid);
 
@@ -46,6 +49,7 @@ public abstract class AbstractStorage<SK> implements Storage {
     private SK getExistedSearchKey(String uuid) {
         SK searchKey = getSearchKey(uuid);
         if (!isExist(searchKey)) {
+            LOG.info("Resume " + uuid + "not exist\n");
             throw new NotExistStorageException(uuid);
         }
         return searchKey;
@@ -54,6 +58,7 @@ public abstract class AbstractStorage<SK> implements Storage {
     private SK getNotExistedSearchKey(String uuid) {
         SK searchKey = getSearchKey(uuid);
         if (isExist(searchKey)) {
+            LOG.info("Resume " + uuid + "already exist\n");
             throw new ExistStorageException(uuid);
         }
         return searchKey;
