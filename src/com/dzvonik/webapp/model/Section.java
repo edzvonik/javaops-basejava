@@ -1,4 +1,7 @@
 package com.dzvonik.webapp.model;
 
-abstract public class Section {
+import java.io.Serializable;
+
+abstract public class Section implements Serializable {
+
 }

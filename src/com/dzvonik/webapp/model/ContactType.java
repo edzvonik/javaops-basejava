@@ -1,5 +1,7 @@
 package com.dzvonik.webapp.model;
 
+import java.io.Serializable;
+
 public enum ContactType {
 
     PHONE("Тел."),

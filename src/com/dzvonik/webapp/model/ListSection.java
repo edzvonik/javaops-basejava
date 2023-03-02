@@ -1,10 +1,13 @@
 package com.dzvonik.webapp.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class ListSection extends Section {
+
+    private static final long serialVersionID = 1L;
 
     private final List<String> items;
 
