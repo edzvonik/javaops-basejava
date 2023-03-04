@@ -2,12 +2,17 @@ package com.dzvonik.webapp.storage;
 
 import com.dzvonik.webapp.exception.ExistStorageException;
 import com.dzvonik.webapp.exception.NotExistStorageException;
-import com.dzvonik.webapp.model.*;
+import com.dzvonik.webapp.model.ContactType;
+import com.dzvonik.webapp.model.ListSection;
+import com.dzvonik.webapp.model.Organization;
+import com.dzvonik.webapp.model.OrganizationSection;
+import com.dzvonik.webapp.model.Resume;
+import com.dzvonik.webapp.model.SectionType;
+import com.dzvonik.webapp.model.TextSection;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
