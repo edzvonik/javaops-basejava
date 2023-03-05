@@ -11,7 +11,9 @@ import java.io.PathOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,24 +22,20 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
 
     private Path directory;
 
-    protected AbstractPathStorage(Path directory) {
+    protected AbstractPathStorage(String dir) {
+        directory =  Paths.get(dir);
         Objects.requireNonNull(directory, "directory must not be null");
-        if (!directory.isDirectory()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
+        if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
+            throw new IllegalArgumentException(directory + " is not directory or is not writable");
         }
-        if (!directory.canRead() || !directory.canWrite()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
-        }
-        this.directory = directory;
     }
 
     @Override
     public void clear() {
-        Path[] Paths = directory.listPaths();
-        if (Paths != null) {
-            for (Path Path : Paths) {
-                doDelete(Path);
-            }
+        try {
+            Files.list(directory).forEach(this::doDelete);
+        } catch (IOException e) {
+            throw new StorageException("Path delete error", null);
         }
     }
 
