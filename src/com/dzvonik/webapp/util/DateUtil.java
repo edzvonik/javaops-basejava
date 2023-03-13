@@ -9,4 +9,6 @@ public class DateUtil {
         return LocalDate.of(year, month, 1);
     }
 
+    public static final LocalDate NOW = LocalDate.of(3000, 1, 1);
+
 }

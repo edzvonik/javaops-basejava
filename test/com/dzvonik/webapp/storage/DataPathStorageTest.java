@@ -1,11 +1,11 @@
 package com.dzvonik.webapp.storage;
 
-import com.dzvonik.webapp.storage.serializer.JsonStreamSerializer;
+import com.dzvonik.webapp.storage.serializer.DataStreamSerializer;
 
-public class JsonPathStorageTest extends AbstractStorageTest {
+public class DataPathStorageTest extends AbstractStorageTest {
 
-    public JsonPathStorageTest() {
-        super(new PathStorage(STORAGE_DIR.getAbsolutePath(), new JsonStreamSerializer()));
+    public DataPathStorageTest() {
+        super(new PathStorage(STORAGE_DIR.getAbsolutePath(), new DataStreamSerializer()));
     }
 
 }

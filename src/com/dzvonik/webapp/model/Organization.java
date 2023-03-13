@@ -1,5 +1,10 @@
 package com.dzvonik.webapp.model;
 
+import com.dzvonik.webapp.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -8,11 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static com.dzvonik.webapp.util.DateUtil.NOW;
 import static com.dzvonik.webapp.util.DateUtil.of;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
 
-    private static final long serialVersionID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private Link homePage;
     private List<Position> positions = new ArrayList<>();
@@ -56,17 +63,20 @@ public class Organization implements Serializable {
         return "Organization(" + homePage + "," + positions + ')';
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate startDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate endDate;
+        private String title;
+        private String description;
 
-        private static final long serialVersionID = 1L;
-
-        private final LocalDate startDate;
-        private final LocalDate endDate;
-        private final String title;
-        private final String description;
+        public Position() {
+        }
 
         public Position(int startYear, Month startMonth, String title, String description) {
-            this(of(startYear, startMonth), LocalDate.now(), title, description);
+            this(of(startYear, startMonth), NOW, title, description);
         }
 
         public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
@@ -80,7 +90,7 @@ public class Organization implements Serializable {
             this.startDate = startDate;
             this.endDate = endDate;
             this.title = title;
-            this.description = description;
+            this.description = description == null ? "" : description;
         }
 
         public LocalDate getStartDate() {
