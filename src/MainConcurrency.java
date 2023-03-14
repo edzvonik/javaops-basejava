@@ -1,5 +1,3 @@
-package com.dzvonik.webapp;
-
 public class MainConcurrency {
 
     public static void main(String[] args) {
