@@ -1,7 +1,5 @@
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -125,7 +123,6 @@ public class MainConcurrency {
 //        }
 //                wait();
 //                readFile
-//                ...
 //        }
     }
 
