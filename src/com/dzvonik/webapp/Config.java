@@ -22,16 +22,25 @@ public class Config {
     }
 
     private Config() {
-        File configDir = new File(System.getProperty("user.dir"), "conf");
-        File configFile = new File(configDir, "resumes.properties");
-        try (InputStream stream = new FileInputStream(configFile)) {
-            Properties props = new Properties();
-            props.load(stream);
+        Properties props = new Properties();
+        try {
+            props.load(this.getClass().getResourceAsStream("/com/dzvonik/webapp/config/resumes.properties"));
             storageDir = new File(props.getProperty("storage.dir"));
             storage = new SqlStorage(props.getProperty("db.url"), props.getProperty("db.user"), props.getProperty("db.password"));
         } catch (IOException e) {
-            throw new IllegalStateException("Invalid config file " + configFile.getAbsolutePath());
+            throw new IllegalStateException("Invalid config file ");
         }
+
+//        File configDir = new File(System.getProperty("user.dir"), "conf");
+//        File configFile = new File(configDir, "resumes.properties");
+//        try (InputStream stream = new FileInputStream(configFile)) {
+//            Properties props = new Properties();
+//            props.load(stream);
+//            storageDir = new File(props.getProperty("storage.dir"));
+//            storage = new SqlStorage(props.getProperty("db.url"), props.getProperty("db.user"), props.getProperty("db.password"));
+//        } catch (IOException e) {
+//            throw new IllegalStateException("Invalid config file " + configFile.getAbsolutePath());
+//        }
 
 //        try (InputStream is = new FileInputStream(PROPS)) {
 //            Properties props = new Properties();
