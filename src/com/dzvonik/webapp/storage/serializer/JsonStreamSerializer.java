@@ -17,7 +17,7 @@ public class JsonStreamSerializer implements StreamSerializer {
     @Override
     public void doWrite(Resume r, OutputStream os) throws IOException {
         try (Writer writer = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
-            JsonParser.write(writer, r);
+            JsonParser.write(r, writer);
         }
     }
 

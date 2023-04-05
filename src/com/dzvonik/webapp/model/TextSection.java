@@ -6,6 +6,8 @@ public class TextSection extends Section {
 
     private static final long serialVersionID = 1L;
 
+    public static final TextSection EMPTY = new TextSection("");
+
     private String content;
 
     public TextSection() {

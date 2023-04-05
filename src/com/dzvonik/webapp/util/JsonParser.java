@@ -17,7 +17,7 @@ public class JsonParser {
         return GSON.fromJson(reader, clazz);
     }
 
-    public static <T> void write(Writer writer, T object) {
+    public static <T> void write(T object, Writer writer) {
         GSON.toJson(object, writer);
     }
 
